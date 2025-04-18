@@ -36,7 +36,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "WUY8fk-Vz"
+        "uid": "DIY8fp-Vz"
       },
       "description": "",
       "fieldConfig": {
@@ -89,9 +89,9 @@
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "WUY8fk-Vz"
+            "uid": "DIY8fp-Vz"
           },
-          "query": "from(bucket: \"piaxe\")\n  |> range(start: -1y)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"${network}_stats\")\n  |> filter(fn: (r) => r[\"_field\"] == \"total_blocks_found\")\n  |> last()  \n  |> map(fn: (r) => {\n      emoji = if r._value == 0 then \"🥹\" else \"🥳\"\n      return ({_field: r._field, _time: r._time, _value: string(v: r._value) + emoji})\n  })\n",
+          "query": "from(bucket: \"my-bucket\")\n  |> range(start: -1y)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"${network}_stats\")\n  |> filter(fn: (r) => r[\"_field\"] == \"total_blocks_found\")\n  |> last()  \n  |> map(fn: (r) => {\n      emoji = if r._value == 0 then \"🥹\" else \"🥳\"\n      return ({_field: r._field, _time: r._time, _value: string(v: r._value) + emoji})\n  })\n",
           "refId": "A"
         }
       ],
@@ -101,7 +101,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "WUY8fk-Vz"
+        "uid": "DIY8fp-Vz"
       },
       "fieldConfig": {
         "defaults": {
@@ -159,9 +159,9 @@
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "WUY8fk-Vz"
+            "uid": "DIY8fp-Vz"
           },
-          "query": "import \"math\"\nfrom(bucket: \"piaxe\")\n  |> range(start: -1y)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"${network}_stats\")\n  |> filter(fn: (r) => r[\"_field\"] == \"total_best_difficulty\")\n  |> last()  \n  |> map(fn: (r) => {\n      suffix = if r._value >= 1000000000000.0 then \"T\"\n               else if r._value >= 1000000000.0 then \"G\"\n               else if r._value >= 1000000.0 then \"M\"\n               else if r._value >= 1000.0 then \"k\"\n               else \"\"    \n      scaled = if r._value >= 1000000000000.0 then r._value / 1000000000000.0\n                else if r._value >= 1000000000.0 then r._value / 1000000000.0\n                else if r._value >= 1000000.0 then r._value / 1000000.0\n                else if r._value >= 1000.0 then r._value / 1000.0\n                else r._value\n      \n      number = math.trunc(x: scaled * 100.0) / 100.0\n      return ({\n        _time: r._time, \n        _value: string(v: number) + suffix\n      })\n  })\n",
+          "query": "import \"math\"\nfrom(bucket: \"my-bucket\")\n  |> range(start: -1y)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"${network}_stats\")\n  |> filter(fn: (r) => r[\"_field\"] == \"total_best_difficulty\")\n  |> last()  \n  |> map(fn: (r) => {\n      suffix = if r._value >= 1000000000000.0 then \"T\"\n               else if r._value >= 1000000000.0 then \"G\"\n               else if r._value >= 1000000.0 then \"M\"\n               else if r._value >= 1000.0 then \"k\"\n               else \"\"    \n      scaled = if r._value >= 1000000000000.0 then r._value / 1000000000000.0\n                else if r._value >= 1000000000.0 then r._value / 1000000000.0\n                else if r._value >= 1000000.0 then r._value / 1000000.0\n                else if r._value >= 1000.0 then r._value / 1000.0\n                else r._value\n      \n      number = math.trunc(x: scaled * 100.0) / 100.0\n      return ({\n        _time: r._time, \n        _value: string(v: number) + suffix\n      })\n  })\n",
           "refId": "A"
         }
       ],
@@ -171,7 +171,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "WUY8fk-Vz"
+        "uid": "DIY8fp-Vz"
       },
       "fieldConfig": {
         "defaults": {
@@ -276,36 +276,36 @@
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "WUY8fk-Vz"
+            "uid": "DIY8fp-Vz"
           },
           "hide": false,
-          "query": "import \"math\"\nfrom(bucket: \"piaxe\")\n  |> range(start: -5m)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"${network}_stats\")\n  |> filter(fn: (r) => r[\"_field\"] == \"best_difficulty\")\n  |> last()  \n  |> map(fn: (r) => {\n      suffix = if r._value >= 1000000000000.0 then \"T\"\n               else if r._value >= 1000000000.0 then \"G\"\n               else if r._value >= 1000000.0 then \"M\"\n               else if r._value >= 1000.0 then \"k\"\n               else \"\"    \n      scaled = if r._value >= 1000000000000.0 then r._value / 1000000000000.0\n                else if r._value >= 1000000000.0 then r._value / 1000000000.0\n                else if r._value >= 1000000.0 then r._value / 1000000.0\n                else if r._value >= 1000.0 then r._value / 1000.0\n                else r._value\n      \n      number = math.trunc(x: scaled * 100.0) / 100.0\n      return ({\n        _time: r._time, \n        _field: \"Best Difficulty\",\n        _value: string(v: number) + suffix\n      })\n  })\n",
+          "query": "import \"math\"\nfrom(bucket: \"my-bucket\")\n  |> range(start: -5m)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"${network}_stats\")\n  |> filter(fn: (r) => r[\"_field\"] == \"best_difficulty\")\n  |> last()  \n  |> map(fn: (r) => {\n      suffix = if r._value >= 1000000000000.0 then \"T\"\n               else if r._value >= 1000000000.0 then \"G\"\n               else if r._value >= 1000000.0 then \"M\"\n               else if r._value >= 1000.0 then \"k\"\n               else \"\"    \n      scaled = if r._value >= 1000000000000.0 then r._value / 1000000000000.0\n                else if r._value >= 1000000000.0 then r._value / 1000000000.0\n                else if r._value >= 1000000.0 then r._value / 1000000.0\n                else if r._value >= 1000.0 then r._value / 1000.0\n                else r._value\n      \n      number = math.trunc(x: scaled * 100.0) / 100.0\n      return ({\n        _time: r._time, \n        _field: \"Best Difficulty\",\n        _value: string(v: number) + suffix\n      })\n  })\n",
           "refId": "E"
         },
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "WUY8fk-Vz"
+            "uid": "DIY8fp-Vz"
           },
-          "query": "from(bucket: \"piaxe\")\n  |> range(start: -5m)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"${network}_stats\")\n  |> filter(fn: (r) => r[\"_field\"] == \"accepted\")\n  |> last()  \n  ",
+          "query": "from(bucket: \"my-bucket\")\n  |> range(start: -5m)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"${network}_stats\")\n  |> filter(fn: (r) => r[\"_field\"] == \"accepted\")\n  |> last()  \n  ",
           "refId": "A"
         },
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "WUY8fk-Vz"
+            "uid": "DIY8fp-Vz"
           },
           "hide": false,
-          "query": "from(bucket: \"piaxe\")\n  |> range(start: -5m)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"${network}_stats\")\n  |> filter(fn: (r) => r[\"_field\"] == \"not_accepted\")\n  |> last()  \n  ",
+          "query": "from(bucket: \"my-bucket\")\n  |> range(start: -5m)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"${network}_stats\")\n  |> filter(fn: (r) => r[\"_field\"] == \"not_accepted\")\n  |> last()  \n  ",
           "refId": "B"
         },
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "WUY8fk-Vz"
+            "uid": "DIY8fp-Vz"
           },
           "hide": false,
-          "query": "from(bucket: \"piaxe\")\n  |> range(start: -5m)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"${network}_stats\")\n  |> filter(fn: (r) => r[\"_field\"] == \"pool_errors\")\n  |> last()  \n  \n\n\n  ",
+          "query": "from(bucket: \"my-bucket\")\n  |> range(start: -5m)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"${network}_stats\")\n  |> filter(fn: (r) => r[\"_field\"] == \"pool_errors\")\n  |> last()  \n  \n\n\n  ",
           "refId": "C"
         }
       ],
@@ -331,7 +331,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "WUY8fk-Vz"
+        "uid": "DIY8fp-Vz"
       },
       "fieldConfig": {
         "defaults": {
@@ -385,9 +385,9 @@
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "WUY8fk-Vz"
+            "uid": "DIY8fp-Vz"
           },
-          "query": "from(bucket: \"piaxe\")\n  |> range(start: -5m)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"${network}_stats\")\n  |> filter(fn: (r) => r[\"_field\"] == \"hashing_speed\")\n  |> last()  \n",
+          "query": "from(bucket: \"my-bucket\")\n  |> range(start: -5m)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"${network}_stats\")\n  |> filter(fn: (r) => r[\"_field\"] == \"hashing_speed\")\n  |> last()  \n",
           "refId": "A"
         }
       ],
@@ -406,10 +406,10 @@
       "type": "row"
     },
     {
-      "datasource": {
-        "type": "influxdb",
-        "uid": "WUY8fk-Vz"
-      },
+          "datasource": {
+            "type": "influxdb",
+            "uid": "DIY8fp-Vz"
+          },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -485,7 +485,7 @@
       },
       "targets": [
         {
-          "query": "from(bucket: \"piaxe\") |> range(start: v.timeRangeStart, stop: v.timeRangeStop) |> filter(fn: (r) => r[\"_measurement\"] == \"mainnet_stats\" and r[\"_field\"] == \"hashing_speed\") |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false) |> yield(name: \"mean\")",
+          "query": "from(bucket: \"my-bucket\") |> range(start: v.timeRangeStart, stop: v.timeRangeStop) |> filter(fn: (r) => r[\"_measurement\"] == \"mainnet_stats\" and r[\"_field\"] == \"hashing_speed\") |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false) |> yield(name: \"mean\")",
           "refId": "A"
         }
       ],
@@ -493,10 +493,10 @@
       "type": "timeseries"
     },
     {
-      "datasource": {
-        "type": "influxdb",
-        "uid": "WUY8fk-Vz"
-      },
+          "datasource": {
+            "type": "influxdb",
+            "uid": "DIY8fp-Vz"
+          },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -572,7 +572,7 @@
       },
       "targets": [
         {
-          "query": "from(bucket: \"piaxe\") |> range(start: v.timeRangeStart, stop: v.timeRangeStop) |> filter(fn: (r) => r[\"_measurement\"] == \"mainnet_stats\" and (r[\"_field\"] == \"best_difficulty\" or r[\"_field\"] == \"total_best_difficulty\")) |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false) |> yield(name: \"mean\")",
+          "query": "from(bucket: \"my-bucket\") |> range(start: v.timeRangeStart, stop: v.timeRangeStop) |> filter(fn: (r) => r[\"_measurement\"] == \"mainnet_stats\" and (r[\"_field\"] == \"best_difficulty\" or r[\"_field\"] == \"total_best_difficulty\")) |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false) |> yield(name: \"mean\")",
           "refId": "A"
         }
       ],
@@ -582,7 +582,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "WUY8fk-Vz"
+        "uid": "DIY8fp-Vz"
       },
       "fieldConfig": {
         "defaults": {
@@ -659,7 +659,7 @@
       },
       "targets": [
         {
-          "query": "from(bucket: \"piaxe\") |> range(start: v.timeRangeStart, stop: v.timeRangeStop) |> filter(fn: (r) => r[\"_measurement\"] == \"mainnet_stats\" and (r[\"_field\"] == \"accepted\" or r[\"_field\"] == \"valid_shares\" or r[\"_field\"] == \"invalid_shares\" or r[\"_field\"] == \"not_accepted\" or r[\"_field\"] == \"duplicate_hashes\")) |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false) |> yield(name: \"mean\")",
+          "query": "from(bucket: \"my-bucket\") |> range(start: v.timeRangeStart, stop: v.timeRangeStop) |> filter(fn: (r) => r[\"_measurement\"] == \"mainnet_stats\" and (r[\"_field\"] == \"accepted\" or r[\"_field\"] == \"valid_shares\" or r[\"_field\"] == \"invalid_shares\" or r[\"_field\"] == \"not_accepted\" or r[\"_field\"] == \"duplicate_hashes\")) |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false) |> yield(name: \"mean\")",
           "refId": "A"
         }
       ],
@@ -669,7 +669,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "WUY8fk-Vz"
+        "uid": "DIY8fp-Vz"
       },
       "fieldConfig": {
         "defaults": {
@@ -814,7 +814,7 @@
       "pluginVersion": "9.5.2",
       "targets": [
         {
-          "query": "from(bucket: \"piaxe\") |> range(start: v.timeRangeStart, stop: v.timeRangeStop) |> filter(fn: (r) => r[\"_measurement\"] == \"mainnet_stats\" and (r[\"_field\"] == \"pwr_iin\" or r[\"_field\"] == \"pwr_iout\" or r[\"_field\"] == \"pwr_pin\" or r[\"_field\"] == \"pwr_pout\" or r[\"_field\"] == \"pwr_vin\" or r[\"_field\"] == \"pwr_vout\")) |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false) |> yield(name: \"mean\")",
+          "query": "from(bucket: \"my-bucket\") |> range(start: v.timeRangeStart, stop: v.timeRangeStop) |> filter(fn: (r) => r[\"_measurement\"] == \"mainnet_stats\" and (r[\"_field\"] == \"pwr_iin\" or r[\"_field\"] == \"pwr_iout\" or r[\"_field\"] == \"pwr_pin\" or r[\"_field\"] == \"pwr_pout\" or r[\"_field\"] == \"pwr_vin\" or r[\"_field\"] == \"pwr_vout\")) |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false) |> yield(name: \"mean\")",
           "refId": "A"
         }
       ],
@@ -825,7 +825,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "WUY8fk-Vz"
+        "uid": "DIY8fp-Vz"
       },
       "fieldConfig": {
         "defaults": {
@@ -902,7 +902,7 @@
       },
       "targets": [
         {
-          "query": "from(bucket: \"piaxe\") |> range(start: v.timeRangeStart, stop: v.timeRangeStop) |> filter(fn: (r) => r[\"_measurement\"] == \"mainnet_stats\" and (r[\"_field\"] == \"temperature\" or r[\"_field\"] == \"temperature2\")) |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false) |> yield(name: \"mean\")",
+          "query": "from(bucket: \"my-bucket\") |> range(start: v.timeRangeStart, stop: v.timeRangeStop) |> filter(fn: (r) => r[\"_measurement\"] == \"mainnet_stats\" and (r[\"_field\"] == \"temperature\" or r[\"_field\"] == \"temperature2\")) |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false) |> yield(name: \"mean\")",
           "refId": "A"
         }
       ],
@@ -912,7 +912,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "WUY8fk-Vz"
+        "uid": "DIY8fp-Vz"
       },
       "fieldConfig": {
         "defaults": {
@@ -989,7 +989,7 @@
       },
       "targets": [
         {
-          "query": "from(bucket: \"piaxe\") |> range(start: v.timeRangeStart, stop: v.timeRangeStop) |> filter(fn: (r) => r[\"_measurement\"] == \"mainnet_stats\" and (r[\"_field\"] == \"uptime\" or r[\"_field\"] == \"total_uptime\")) |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false) |> yield(name: \"mean\")",
+          "query": "from(bucket: \"my-bucket\") |> range(start: v.timeRangeStart, stop: v.timeRangeStop) |> filter(fn: (r) => r[\"_measurement\"] == \"mainnet_stats\" and (r[\"_field\"] == \"uptime\" or r[\"_field\"] == \"total_uptime\")) |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false) |> yield(name: \"mean\")",
           "refId": "A"
         }
       ],
@@ -999,7 +999,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "WUY8fk-Vz"
+        "uid": "DIY8fp-Vz"
       },
       "fieldConfig": {
         "defaults": {
@@ -1076,7 +1076,7 @@
       },
       "targets": [
         {
-          "query": "from(bucket: \"piaxe\") |> range(start: v.timeRangeStart, stop: v.timeRangeStop) |> filter(fn: (r) => r[\"_measurement\"] == \"mainnet_stats\" and r[\"_field\"] == \"pool_errors\") |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false) |> yield(name: \"mean\")",
+          "query": "from(bucket: \"my-bucket\") |> range(start: v.timeRangeStart, stop: v.timeRangeStop) |> filter(fn: (r) => r[\"_measurement\"] == \"mainnet_stats\" and r[\"_field\"] == \"pool_errors\") |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false) |> yield(name: \"mean\")",
           "refId": "A"
         }
       ],

@@ -22,9 +22,13 @@ services:
     volumes:
       - grafana-data:/var/lib/grafana
       - ./grafana/provisioning/dashboards:/etc/grafana/provisioning/dashboards
+      - ./grafana/provisioning/datasources:/etc/grafana/provisioning/datasources
     environment:
-      - GF_SECURITY_ADMIN_USER=admin
-      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_SECURITY_ADMIN_USER=${DOCKER_GRAFANA_INIT_USERNAME}
+      - GF_SECURITY_ADMIN_PASSWORD=${DOCKER_GRAFANA_INIT_PASSWORD}
+      - DOCKER_INFLUXDB_INIT_ORG=${DOCKER_INFLUXDB_INIT_ORG}
+      - DOCKER_INFLUXDB_INIT_BUCKET=${DOCKER_INFLUXDB_INIT_BUCKET}
+      - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=${DOCKER_INFLUXDB_INIT_ADMIN_TOKEN}
     restart: unless-stopped
 
 volumes:
